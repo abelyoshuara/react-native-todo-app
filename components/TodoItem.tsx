@@ -1,13 +1,25 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import Feather from "@expo/vector-icons/Feather";
 
 interface TodoItemProps {
   id: number;
   name: string;
   isCompleted: boolean;
+  onDeleteTodo: (id: number) => void;
 }
 
-export default function TodoItem({ name, isCompleted }: TodoItemProps) {
+export default function TodoItem({
+  id,
+  name,
+  isCompleted,
+  onDeleteTodo,
+}: TodoItemProps) {
   return (
     <View style={styles.item}>
       <Pressable onPress={() => console.log("Pressed test")}>
@@ -19,12 +31,9 @@ export default function TodoItem({ name, isCompleted }: TodoItemProps) {
       </Pressable>
       <Text>{name}</Text>
       <View style={styles.iconContainer}>
-        <Feather
-          name="trash"
-          size={24}
-          color="red"
-          onPress={() => console.log("delete")}
-        />
+        <TouchableOpacity onPress={() => onDeleteTodo(id)}>
+          <Feather name="trash" size={24} color="red" />
+        </TouchableOpacity>
       </View>
     </View>
   );

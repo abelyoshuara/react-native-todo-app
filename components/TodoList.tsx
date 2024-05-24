@@ -17,7 +17,9 @@ export default function TodoList({
     <View>
       <FlatList
         data={todos}
-        renderItem={({ item }) => <TodoItem {...item} />}
+        renderItem={({ item }) => (
+          <TodoItem {...item} onDeleteTodo={() => onDeleteTodo(item.id)} />
+        )}
         keyExtractor={(item) => item.id.toString()}
         ItemSeparatorComponent={() => <View style={{ height: 5 }} />}
         ListEmptyComponent={<Text>No items</Text>}
