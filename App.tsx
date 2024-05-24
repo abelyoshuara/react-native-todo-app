@@ -16,7 +16,9 @@ import { Todo } from "./types/Todo";
 
 export default function App() {
   const [todos, dispatch] = useReducer(todosReducer, initialTodos);
-  const [status, setStatus] = useState<string>("all");
+  const [status, setStatus] = useState<"all" | "uncompleted" | "completed">(
+    "all"
+  );
 
   let [fontsLoaded] = useFonts({
     Figtree_400Regular,
@@ -48,13 +50,13 @@ export default function App() {
   };
 
   const getFilteredTodos = () => {
-    const copyTodos = todos.slice();
-    if (status === "all") {
-      return copyTodos;
-    } else if (status === "uncompleted") {
+    const copyTodos: Todo[] = todos.slice();
+    if (status === "uncompleted") {
       return copyTodos.filter((todo: Todo) => !todo.isCompleted);
     } else if (status === "completed") {
       return copyTodos.filter((todo: Todo) => todo.isCompleted);
+    } else {
+      return copyTodos;
     }
   };
 

@@ -1,9 +1,9 @@
 import { Todo } from "../types/Todo";
 
-export type Action = {
-  type: string;
-  payload: { id?: string | number; name: string; isComplete: boolean };
-};
+export type Action =
+  | { type: "ADD_TODO"; payload: { name: string; isCompleted: boolean } }
+  | { type: "DELETE_TODO"; payload: { id: number } }
+  | { type: "UPDATE_TODO"; payload: { id: number } };
 
 const initialTodos: Todo[] = [];
 
