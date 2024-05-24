@@ -30,6 +30,13 @@ export default function App() {
     } as Action);
   };
 
+  const handleUpdateTodo = (id: number) => {
+    dispatch({
+      type: "UPDATE_TODO",
+      payload: { id },
+    } as Action);
+  };
+
   return (
     <SafeAreaView style={styles.safeContainer}>
       <View style={styles.container}>
@@ -38,7 +45,7 @@ export default function App() {
           <TodoList
             todos={todos}
             onDeleteTodo={handleDeleteTodo}
-            onUpdateTodo={() => {}}
+            onUpdateTodo={handleUpdateTodo}
           />
         </View>
         <TodoInput onAddTodo={handleAddTodo} />

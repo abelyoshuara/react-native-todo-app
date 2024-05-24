@@ -22,7 +22,7 @@ function todosReducer(todos: Todo[], action: Action) {
     case "UPDATE_TODO": {
       const todo = todos.map((todo: Todo) =>
         todo.id === action.payload.id
-          ? { ...todo, isComplete: !todo.isCompleted }
+          ? { ...todo, isCompleted: !todo.isCompleted }
           : todo
       );
       return todo;

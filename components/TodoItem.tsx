@@ -12,6 +12,7 @@ interface TodoItemProps {
   name: string;
   isCompleted: boolean;
   onDeleteTodo: (id: number) => void;
+  onUpdateTodo: (id: number) => void;
 }
 
 export default function TodoItem({
@@ -19,10 +20,11 @@ export default function TodoItem({
   name,
   isCompleted,
   onDeleteTodo,
+  onUpdateTodo,
 }: TodoItemProps) {
   return (
     <View style={styles.item}>
-      <Pressable onPress={() => console.log("Pressed test")}>
+      <Pressable onPress={() => onUpdateTodo(id)}>
         {isCompleted ? (
           <Feather name="check-square" size={24} color="black" />
         ) : (
