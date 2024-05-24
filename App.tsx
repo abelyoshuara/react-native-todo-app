@@ -1,12 +1,22 @@
-import { useMemo, useReducer, useState } from "react";
-import { Platform, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { useCallback, useMemo, useReducer, useState } from "react";
+import {
+  Platform,
+  Pressable,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { useFonts, Figtree_400Regular } from "@expo-google-fonts/figtree";
 import { Action, initialTodos, todosReducer } from "./reducers/todos";
 import TodoList from "./components/TodoList";
 import TodoInput from "./components/TodoInput";
+import Tab from "./components/Tab";
+import { Todo } from "./types/Todo";
 
 export default function App() {
   const [todos, dispatch] = useReducer(todosReducer, initialTodos);
+  const [status, setStatus] = useState<string>("all");
 
   let [fontsLoaded] = useFonts({
     Figtree_400Regular,
@@ -37,13 +47,40 @@ export default function App() {
     } as Action);
   };
 
+  const getFilteredTodos = () => {
+    const copyTodos = todos.slice();
+    if (status === "all") {
+      return copyTodos;
+    } else if (status === "uncompleted") {
+      return copyTodos.filter((todo: Todo) => !todo.isCompleted);
+    } else if (status === "completed") {
+      return copyTodos.filter((todo: Todo) => todo.isCompleted);
+    }
+  };
+
   return (
     <SafeAreaView style={styles.safeContainer}>
       <View style={styles.container}>
         <View style={{ flex: 1, paddingBottom: 130 }}>
           <Text style={styles.title}>Todo List App</Text>
+
+          <Tab>
+            <Pressable onPress={() => setStatus("all")}>
+              <Tab.Item value="All" isActive={status === "all"} />
+            </Pressable>
+            <Pressable onPress={() => setStatus("uncompleted")}>
+              <Tab.Item
+                value="Uncompleted"
+                isActive={status === "uncompleted"}
+              />
+            </Pressable>
+            <Pressable onPress={() => setStatus("completed")}>
+              <Tab.Item value="Completed" isActive={status === "completed"} />
+            </Pressable>
+          </Tab>
+
           <TodoList
-            todos={todos}
+            todos={getFilteredTodos()}
             onDeleteTodo={handleDeleteTodo}
             onUpdateTodo={handleUpdateTodo}
           />
@@ -69,9 +106,9 @@ const styles = StyleSheet.create({
     color: "#334155",
     fontSize: 30,
     fontWeight: "bold",
-    textAlign: "center",
+    textAlign: "left",
     paddingTop: 45,
-    paddingBottom: 25,
+    paddingBottom: 8,
     fontFamily: "Figtree_400Regular",
   },
 });
