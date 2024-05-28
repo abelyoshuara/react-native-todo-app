@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, Text, View } from "react-native";
 import type { Todo } from "../types/Todo";
 import TodoItem from "./TodoItem";
 
@@ -31,5 +31,3 @@ export default function TodoList({
     </View>
   );
 }
-
-const styles = StyleSheet.create({});

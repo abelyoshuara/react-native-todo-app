@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useReducer, useState } from "react";
+import { useReducer, useState } from "react";
 import {
   Platform,
   Pressable,
@@ -17,10 +17,10 @@ import { Todo } from "./types/Todo";
 export default function App() {
   const [todos, dispatch] = useReducer(todosReducer, initialTodos);
   const [status, setStatus] = useState<"all" | "uncompleted" | "completed">(
-    "all"
+    "all",
   );
 
-  let [fontsLoaded] = useFonts({
+  const [fontsLoaded] = useFonts({
     Figtree_400Regular,
   });
 

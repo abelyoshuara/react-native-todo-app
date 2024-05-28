@@ -65,7 +65,7 @@ describe("todosReducer function", () => {
     const updateTodo = initialState.map((todo: Todo) =>
       todo.id === action.payload.id
         ? { ...todo, isCompleted: !todo.isCompleted }
-        : todo
+        : todo,
     );
 
     expect(nextState).toEqual(updateTodo);
@@ -94,7 +94,7 @@ describe("todosReducer function", () => {
 
     const nextState = todosReducer(initialState, action);
     const deleteTodo = initialState.filter(
-      (todo) => todo.id !== action.payload.id
+      (todo) => todo.id !== action.payload.id,
     );
 
     expect(nextState).toEqual(deleteTodo);

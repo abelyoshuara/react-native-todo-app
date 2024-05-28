@@ -23,7 +23,7 @@ function todosReducer(todos: Todo[], action: Action) {
       const todo = todos.map((todo: Todo) =>
         todo.id === action.payload.id
           ? { ...todo, isCompleted: !todo.isCompleted }
-          : todo
+          : todo,
       );
       return todo;
     }
