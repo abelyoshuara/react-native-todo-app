@@ -34,7 +34,11 @@ export default function TodoInput({ onAddTodo }: TodoInputProps) {
         onSubmitEditing={handleAddTodo}
       />
 
-      <TouchableOpacity style={styles.iconContainer} onPress={handleAddTodo}>
+      <TouchableOpacity
+        testID="addButton"
+        style={styles.iconContainer}
+        onPress={handleAddTodo}
+      >
         <Text>
           <FontAwesome6 name="add" size={24} color="black" />
         </Text>
